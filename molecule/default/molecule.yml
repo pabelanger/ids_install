@@ -4,17 +4,17 @@ dependency:
   command: ./tools/install_roles.sh
   enabled: true
 driver:
-  name: docker
+  name: podman
 lint:
   name: yamllint
 platforms:
   - name: instance
     image: centos:7
-    privileged: true
-    volume_mounts:
-      - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
+    privileged: false
     command: "/usr/sbin/init"
-    environment: { container: docker }
+    tty: true
+    capabilities:
+      - SYS_ADMIN
 provisioner:
   name: ansible
   lint:
