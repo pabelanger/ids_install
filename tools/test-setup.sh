@@ -14,8 +14,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-if ! [ $(getent group docker) ]; then
-    sudo groupadd docker
-fi
-sudo gpasswd -a ${USER} docker
-sudo service docker restart
+sudo setsebool container_manage_cgroup 1
