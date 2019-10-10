@@ -14,8 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-if ! [ $(getent group docker) ]; then
-    sudo groupadd docker
-fi
-sudo gpasswd -a ${USER} docker
-sudo service docker restart
+mkdir -p ~/.config/containers
+
+dd of=~/.config/containers/storage.conf <<EOF
+[storage]
+# Default Storage Driver
+driver = "overlay"
+EOF
